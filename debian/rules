@@ -3,7 +3,7 @@
 
 include /usr/share/dpkg/pkg-info.mk
 
-PYTHON3_VERSIONS = $(shell py3versions -r)
+PYTHON3_VERSIONS = $(shell py3versions -r | awk '{print $$NF}')
 pyalldo = set -e; $(foreach py, $(PYTHON3_VERSIONS), $(py) $(1);)
 
 BIN_NAME = gcovr
