@@ -1,0 +1,5 @@
+root/stdout.log
+
+# Ignore the linked directory
+symlink_root
+/symlink

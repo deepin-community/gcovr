@@ -1,12 +1,14 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: gcovr
-Upstream-Contact: https://github.com/gcovr/gcovr
+Upstream-Contact: https://github.com/gcovr
 Source: http://gcovr.com/
 
 Files: *
-Copyright: 2013 Sandia Corporation
-           2008 William Hart <wehart@sandia.gov>
-           2008 John Siirola <jdsiiro@sandia.gov>
+Copyright:
+ 2013-2021 the gcovr authors
+ 2013 Sandia Corporation
+ 2008 William Hart <wehart@sandia.gov>
+ 2008 John Siirola <jdsiiro@sandia.gov>
 License: BSD-3-clause
  Copyright 2008 Sandia Corporation. Under the terms of Contract DE-AC04-
  94AL85000 with Sandia Corporation, the U.S. Government retains certain
@@ -42,7 +44,9 @@ License: BSD-3-clause
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Files: debian/*
-Copyright: 2011-2012 Canonical Ltd, 2014 Wolfgang Silbermayr
+Copyright:
+ 2014-2021 Wolfgang Silbermayr
+ 2011-2012 Canonical Ltd
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

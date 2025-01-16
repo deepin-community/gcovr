@@ -6,18 +6,21 @@ all:
 	$(CXX) $(CFLAGS) -c src/main.cpp -o build/main.o
 	$(CXX) $(CFLAGS) build/main.o build/file1.o -o build/testcase
 
-run: txt xml html sonarqube json_summary coveralls
+run: txt lcov cobertura html sonarqube jacoco json_summary coveralls
 
 
 coverage.json:
 	build/testcase
-	$(GCOVR) --json $@
+	$(GCOVR) --json-pretty --json $@
 
 txt: coverage.json
 	$(GCOVR) -a $< -o coverage.txt
 
-xml: coverage.json
-	$(GCOVR) -a $< -x -o coverage.xml
+lcov: coverage.json
+	$(GCOVR) -a $< --lcov coverage.lcov
+
+cobertura: coverage.json
+	$(GCOVR) -a $< --cobertura-pretty --cobertura cobertura.xml
 
 html: coverage.json
 	$(GCOVR) -a $< --html-details -o coverage.html
@@ -25,8 +28,11 @@ html: coverage.json
 sonarqube: coverage.json
 	$(GCOVR) -a $< --sonarqube sonarqube.xml
 
+jacoco: coverage.json
+	$(GCOVR) -a $< --jacoco jacoco.xml
+
 coveralls: coverage.json
-	$(GCOVR) -a $< --coveralls coveralls.json
+	$(GCOVR) -a $< --coveralls-pretty --coveralls coveralls.json
 
 json_summary:
 	build/testcase
@@ -34,4 +40,4 @@ json_summary:
 
 clean:
 	rm -f build/*
-	rm -f coverage*.* sonarqube*.* summary_coverage.json coveralls.json
+	rm -f coverage*.* cobertura*.* sonarqube*.* jacoco*.* summary_coverage.json coveralls.json

@@ -3,30 +3,34 @@ all:
 	@echo "CC:   ${CC} (origin: $(origin CC))"
 	@echo "CXX:  ${CXX} (origin: $(origin CXX))"
 	@echo "GCOV: ${GCOV} (origin: $(origin GCOV))"
-	cmake -DCMAKE_TOOLCHAIN_FILE=Toolchain.cmake -G "Ninja" -S . -B build/build
-	cmake --build build/build -- -v
+	cp -f ../cmake_oos/main.cpp ./
+	cmake -G "Ninja" -DCMAKE_BUILD_TYPE=PROFILE -S . -B build
+	cmake --build build -- -v
 
-run: txt xml html sonarqube coveralls
+run: txt cobertura html sonarqube jacoco coveralls
 
 coverage.json:
-	cd build/build && ./gcovrtest
-	$(GCOVR) --json coverage.json --object-directory=build/build
+	cd build && ./gcovrtest
+	$(GCOVR) --json-pretty --json coverage.json --gcov-object-directory=build
 
 txt: coverage.json
 	$(GCOVR) -a $< -o coverage.txt
 
-xml: coverage.json
-	$(GCOVR) -a $< -x -o coverage.xml
+cobertura: coverage.json
+	$(GCOVR) -a $< --cobertura-pretty --cobertura cobertura.xml
 
 html: coverage.json
 	$(GCOVR) -a $< --html-details -o coverage.html
 
 coveralls: coverage.json
-	$(GCOVR) -a $<  --coveralls coveralls.json
+	$(GCOVR) -a $<  --coveralls-pretty --coveralls coveralls.json
 
 sonarqube: coverage.json
 	$(GCOVR) -a $< --sonarqube -o sonarqube.xml
 
+jacoco: coverage.json
+	$(GCOVR) -a $< --jacoco -o jacoco.xml
+
 clean:
-	rm -rf build
-	rm -f coverage*.* sonarqube*.* coveralls.json
+	rm -rf build main.cpp
+	rm -f coverage*.* cobertura*.* sonarqube*.* jacoco*.* coveralls.json

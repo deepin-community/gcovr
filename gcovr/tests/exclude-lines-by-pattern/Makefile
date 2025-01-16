@@ -1,15 +1,19 @@
 all:
 	$(CXX) -fprofile-arcs -ftest-coverage -fPIC main.cpp -o testcase
 
-run: txt xml html sonarqube coveralls
+run: txt lcov cobertura html sonarqube jacoco coveralls
 
 txt:
 	./testcase
 	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' -o coverage.txt
 
-xml:
+lcov:
 	./testcase
-	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' -x -o coverage.xml
+	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --lcov coverage.lcov
+
+cobertura:
+	./testcase
+	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --cobertura-pretty --cobertura cobertura.xml
 
 html:
 	./testcase
@@ -19,11 +23,15 @@ sonarqube:
 	./testcase
 	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --sonarqube sonarqube.xml
 
+jacoco:
+	./testcase
+	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --jacoco jacoco.xml
+
 coveralls:
 	./testcase
-	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --coveralls coveralls.json
+	$(GCOVR) -d --exclude-lines-by-pattern ' *panic\([^)]*\);' --coveralls-pretty --coveralls coveralls.json
 
 clean:
 	rm -f testcase
 	rm -f *.gc*
-	rm -f coverage.txt coverage.xml coverage*.html coverage.css sonarqube.xml coveralls.json
+	rm -f coverage.txt coverage*.html coverage.css cobertura.xml sonarqube.xml jacoco.xml coveralls.json coverage.lcov

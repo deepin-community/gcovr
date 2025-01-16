@@ -2,7 +2,8 @@
 coverage*.txt
 coverage*.json
 summary_coverage*.json
-coverage*.xml
+clover*.xml
+cobertura*.xml
 sonarqube*.xml
 coverage*.csv
 coveralls*.json
@@ -30,3 +31,6 @@ testcase
 
 # Differences
 diff.zip
+
+# MacOS
+.DS_Store

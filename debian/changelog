@@ -1,11 +1,54 @@
+gcovr (7.2+really-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Really use upstream version 7.2 (not 3.2 as was previously imported).
+    In order to have a new upstream version we temporarily add `+really'.
+    Closes: #1070172 
+  * Drop patch. Readme isn't copied anymore
+  * d/control: Add new build dependencies
+
+ -- Guido Günther <agx@sigxcpu.org>  Thu, 02 May 2024 15:43:35 +0200
+
+gcovr (7.2-1) unstable; urgency=medium
+
+  * New usptream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Tue, 23 Apr 2024 22:09:47 +0200
+
+gcovr (7.0-1) unstable; urgency=medium
+
+  * New usptream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Mon, 29 Jan 2024 09:12:26 +0100
+
+gcovr (6.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 09 Jul 2023 09:38:01 +0200
+
+gcovr (5.2-1) unstable; urgency=medium
+
+  * New usptream release
+
+ -- Sylvestre Ledru <sylvestre@debian.org>  Sun, 14 Aug 2022 13:11:55 +0200
+
+gcovr (5.0-2) unstable; urgency=medium
+
+  * Fix FTBFS due to false assembly of PYTHONPATH during build
+    (Closes: #1002411)
+
+ -- Wolfgang Silbermayr <wolfgang@silbermayr.at>  Wed, 22 Dec 2021 18:46:13 +0100
+
 gcovr (5.0-1) unstable; urgency=medium
 
   * New upstream version 5.0
   * Drop dependency on lcov (Closes: #987818)
   * Generate manpage at build time
   * Add Upstream-Contact to debian/copyright
+  * Update debian/changelog to reflect recent changes
 
- -- Wolfgang Silbermayr <wolfgang@silbermayr.at>  Mon, 23 Aug 2021 07:48:18 +0200
+ -- Wolfgang Silbermayr <wolfgang@silbermayr.at>  Mon, 23 Aug 2021 07:55:04 +0200
 
 gcovr (4.2-1) unstable; urgency=medium
 

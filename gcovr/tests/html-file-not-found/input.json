@@ -1,0 +1,29 @@
+{
+    "files": [
+        {
+            "file": "does-not-exist.cpp",
+            "functions": [
+                {
+                    "blocks_percent": 100.0,
+                    "execution_count": 1,
+                    "lineno": 2,
+                    "name": "main",
+                    "returned_count": 1
+                }
+            ],
+            "lines": [
+                {
+                    "branches": [],
+                    "count": 1,
+                    "line_number": 2
+                },
+                {
+                    "branches": [],
+                    "count": 1,
+                    "line_number": 3
+                }
+            ]
+        }
+    ],
+    "gcovr/format_version": "0.6"
+}

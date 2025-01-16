@@ -6,6 +6,7 @@ Uploaders: Sylvestre Ledru <sylvestre@debian.org>
 Build-Depends: debhelper (>= 11),
                python3,
                python3-setuptools,
+               python3-colorlog,
                dh-python,
                help2man,
                python3-importlib-metadata,
@@ -20,6 +21,7 @@ Package: gcovr
 Architecture: all
 Depends: ${misc:Depends},
          ${python3:Depends},
+         python3-colorlog,
          python3-pkg-resources,
 Description: Manages the compilation of coverage information from gcov
  The gcovr command provides a utility for running the gcov command and
