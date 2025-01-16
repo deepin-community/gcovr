@@ -6,16 +6,13 @@ ifeq ($(BASE_OS),Darwin)
   CFLAGS     += -fPIC
   SOFLAGS    += -dynamiclib -undefined dynamic_lookup
 endif
-ifneq (,$(findstring MINGW,$(BASE_OS)))
-  BASE_OS:=MSYS_NT
-endif
 ifeq ($(BASE_OS),CYGWIN_NT)
   DYNLIB_EXT = dll
   #DEFINES   += -mno-cygwin
   #SOFLAGS   += -shared -wl,--kill-at
   SOFLAGS    += -shared
 endif
-ifeq ($(BASE_OS),MSYS_NT)
+ifneq ($(filter $(BASE_OS),MSYS_NT MINGW64_NT),)
   DYNLIB_EXT = dll
   SOFLAGS    += -shared
 endif
@@ -35,31 +32,31 @@ all:
 	$(CXX) $(CFLAGS) $(SOFLAGS) obj/libs.o -o lib/libs.$(DYNLIB_EXT)
 	$(MAKE) -C testApp
 
-run: txt xml html sonarqube coveralls
+run: txt cobertura html sonarqube jacoco coveralls
 
-ifeq ($(BASE_OS),MSYS_NT)
+ifneq ($(filter $(BASE_OS),MSYS_NT MINGW64_NT),)
 ifneq ($(notdir $(SHELL)),sh)
 coverage.json : export PATH := $(subst /,\,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))\lib;${PATH}
 endif
 endif
 
 coverage.json:
-ifeq ($(BASE_OS),MSYS_NT)
+ifeq ($(filter $(BASE_OS),MSYS_NT MINGW64_NT),)
+	LD_LIBRARY_PATH=`pwd`/lib testApp/test/a.out
+else
 ifeq ($(notdir $(SHELL)),sh)
 	PATH="`pwd`/lib:${PATH}" testApp/test/a.out
 else
 	testApp/test/a.out
 endif
-else
-	LD_LIBRARY_PATH=`pwd`/lib testApp/test/a.out
 endif
-	$(GCOVR) --json $@
+	$(GCOVR) --json-pretty --json $@
 
 txt: coverage.json
 	$(GCOVR) -a $< -o coverage.txt
 
-xml: coverage.json
-	$(GCOVR) -a $< -x -o coverage.xml
+cobertura: coverage.json
+	$(GCOVR) -a $< --cobertura-pretty --cobertura cobertura.xml
 
 html: coverage.json
 	$(GCOVR) -a $< --html-details -o coverage.html
@@ -67,11 +64,14 @@ html: coverage.json
 sonarqube: coverage.json
 	$(GCOVR) -a $< --sonarqube sonarqube.xml
 
+jacoco: coverage.json
+	$(GCOVR) -a $< --jacoco jacoco.xml
+
 coveralls: coverage.json
-	$(GCOVR) -a $< --coveralls coveralls.json
+	$(GCOVR) -a $< --coveralls-pretty --coveralls coveralls.json
 
 clean:
 	rm -rf obj
 	rm -f lib/*.$(DYNLIB_EXT)
-	rm -f coverage*.* sonarqube*.* coveralls.json
+	rm -f coverage*.* cobertura*.* sonarqube*.* jacoco*.* coveralls.json
 	$(MAKE) -C testApp clean

@@ -10,11 +10,11 @@ all:
 
 run: txt html
 
-GCOVR_TEST_OPTIONS = --sort-uncovered
+GCOVR_TEST_OPTIONS = --sort uncovered-number
 
 coverage.json:
 	./testcase
-	$(GCOVR) --json $@
+	$(GCOVR) --json-pretty --json $@
 
 txt: coverage.json
 	$(GCOVR) $(GCOVR_TEST_OPTIONS) -a $< -o coverage.txt
@@ -25,4 +25,4 @@ html: coverage.json
 clean:
 	rm -f testcase
 	rm -f *.gc* *.o
-	rm -f coverage*.* sonarqube*.*
+	rm -f coverage*.* cobertura*.* sonarqube*.*

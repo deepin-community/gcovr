@@ -26,7 +26,7 @@ exec >&2  # redirect output to STDERR
 
 #BEGIN cmake_build
 cd $BLD_DIR
-cmake $SRC_DIR
+cmake -DCMAKE_BUILD_TYPE=PROFILE $SRC_DIR
 make VERBOSE=1
 #END cmake_build
 )
@@ -45,6 +45,6 @@ cd $BLD_DIR
 (
 #BEGIN cmake_gcovr
 cd $BLD_DIR
-gcovr -r $SRC_DIR .
+gcovr -r $SRC_DIR . --txt example_cmake.txt
 #END cmake_gcovr
 )

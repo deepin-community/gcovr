@@ -1,0 +1,10 @@
+# Tests
+source: source-is-missing [gcovr/tests/calls/reference/clang-10/coverage.callcov.c.36709b3fa42dd955fc97329aec8b8b80.html]
+source: source-is-missing [gcovr/tests/calls/reference/clang-13/coverage.callcov.c.36709b3fa42dd955fc97329aec8b8b80.html]
+source: source-is-missing [gcovr/tests/calls/reference/gcc-5/coverage.callcov.c.36709b3fa42dd955fc97329aec8b8b80.html]
+source: source-is-missing [gcovr/tests/decisions/reference/clang-10/coverage.main.cpp.118fcbaaba162ba17933c7893247df3a.html]
+source: source-is-missing [gcovr/tests/decisions/reference/clang-13/coverage.main.cpp.118fcbaaba162ba17933c7893247df3a.html]
+source: source-is-missing [gcovr/tests/decisions/reference/gcc-11/coverage.main.cpp.118fcbaaba162ba17933c7893247df3a.html]
+source: source-is-missing [gcovr/tests/decisions/reference/gcc-5/coverage.main.cpp.118fcbaaba162ba17933c7893247df3a.html]
+source: source-is-missing [gcovr/tests/decisions/reference/gcc-8/coverage.main.cpp.118fcbaaba162ba17933c7893247df3a.html]
+

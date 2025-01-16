@@ -3,19 +3,22 @@ CFLAGS= -fprofile-arcs -ftest-coverage -fPIC
 all:
 	make -C subdir/A
 	$(CXX) $(CFLAGS) -c subdir/B/main.cpp -o subdir/B/main.o
-	$(CXX) $(CFLAGS) subdir/B/main.o subdir/A/file1.o subdir/A/file2.o subdir/A/file3.o subdir/A/file4.o subdir/A/C/file5.o subdir/A/C/D/file6.o subdir/A/file7.o  -o subdir/B/testcase -lgcov
+	$(CXX) $(CFLAGS) subdir/B/main.o subdir/A/file1.o subdir/A/file2.o subdir/A/file3.o subdir/A/file4.o subdir/A/C/file5.o subdir/A/C/D/file6.o subdir/A/file7.o  -o subdir/B/testcase
 
-run: txt xml html sonarqube coveralls
+run: txt lcov cobertura html sonarqube jacoco coveralls
 
 coverage.json:
 	./subdir/B/testcase
-	$(GCOVR) -r subdir --json $@
+	$(GCOVR) --gcov-keep -r subdir --filter subdir/A --json-pretty --json $@
 
 txt: coverage.json
 	$(GCOVR) -r subdir -a $< -o coverage.txt
 
-xml: coverage.json
-	$(GCOVR) -r subdir -a $< -x -o coverage.xml
+lcov: coverage.json
+	$(GCOVR) -r subdir -a $< --lcov coverage.lcov
+
+cobertura: coverage.json
+	$(GCOVR) -r subdir -a $< --cobertura-pretty --cobertura cobertura.xml
 
 html: coverage.json
 	$(GCOVR) -r subdir -a $< --html-details --html-theme blue -o coverage.html
@@ -23,11 +26,14 @@ html: coverage.json
 sonarqube: coverage.json
 	$(GCOVR) -r subdir -a $< --sonarqube sonarqube.xml
 
+jacoco: coverage.json
+	$(GCOVR) -r subdir -a $< --jacoco jacoco.xml
+
 coveralls:coverage.json
-	$(GCOVR) -r subdir -a $< --coveralls coveralls.json
+	$(GCOVR) -r subdir -a $< --coveralls-pretty --coveralls coveralls.json
 
 clean:
 	rm -f ./subdir/B/testcase subdir/lib.a
 	rm -f *.gc* */*.gc* */*/*.gc* */*/*/*.gc* */*/*/*/*.gc*
 	rm -f *.o */*.o */*/*.o */*/*/*.o */*/*/*/*.o
-	rm -f coverage*.* sonarqube*.* coveralls.json
+	rm -f coverage*.* cobertura*.* sonarqube*.* jacoco*.* coveralls.json

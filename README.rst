@@ -3,9 +3,9 @@ gcovr
 
 generate GCC code coverage reports
 
-website_ • documentation_ • bugtracker_ • `GitHub <repo_>`_
+`website and documentation <website_>`__ • bugtracker_ • `GitHub <repo_>`__
 
-|GitHub-Actions-badge| |pypi-badge| |codecov-badge| |gitter-badge|
+|GitHub-Actions-badge| |pypi-badge| |codecov-badge| |Readthedocs-badge| |gitter-badge|
 
 .. begin abstract
 
@@ -16,15 +16,65 @@ utility for Python.
 
 The ``gcovr`` command can produce different kinds of coverage reports:
 
--  default or :option:`--txt<gcovr --txt>`: compact human-readable summaries
--  :option:`--html<gcovr --html>`: HTML summaries
--  :option:`--html-details<gcovr --html-details>`: HTML report with annotated source files
--  :option:`-x/--xml<gcovr --xml>`: machine readable XML reports in Cobertura_ format
--  :option:`--sonarqube<gcovr --sonarqube>`: machine readable XML reports in Sonarqube format
--  :option:`--json<gcovr --json>`: JSON report with source files structure and coverage
--  :option:`--json-summary<gcovr --json-summary>`: JSON summary coverage report
--  :option:`--csv<gcovr --csv>`: CSV report summarizing the coverage of each file
--  :option:`--coveralls<gcovr --coveralls>`: machine readable JSON reports in Coveralls_ format
+.. list-table::
+   :header-rows: 1
+
+   * - CLI Option
+     - User Guide
+     - Description
+
+   * - default, |abstract-option-txt|
+     - |abstract-guide-txt|
+     - compact human-readable summaries
+
+   * - |abstract-option-html|
+     - |abstract-guide-html|
+     - overview of all files
+
+   * - |abstract-option-html-details|
+     - |abstract-guide-html-details|
+     - annotated source files
+
+   * - |abstract-option-html-template-dir|
+     - |abstract-guide-html-template-dir|
+     - use custom set of Jinja2 templates
+
+   * - |abstract-option-csv|
+     - |abstract-guide-csv|
+     - CSV report summarizing the coverage of each file
+
+   * - |abstract-option-json|
+     - |abstract-guide-json|
+     - JSON report with source file structure and coverage
+
+   * - |abstract-option-json-summary|
+     - |abstract-guide-json-summary|
+     - JSON summary coverage report
+
+   * - |abstract-option-clover|
+     - |abstract-guide-clover|
+     - machine readable XML reports in Clover_ format
+
+   * - |abstract-option-cobertura|
+     - |abstract-guide-cobertura|
+     - machine readable XML reports in Cobertura_ format
+
+   * - |abstract-option-coveralls|
+     - |abstract-guide-coveralls|
+     - machine readable JSON report in Coveralls_ format
+
+   * - |abstract-option-jacoco|
+     - |abstract-guide-jacoco|
+     - machine readable XML reports in JaCoCo_ format
+
+   * - |abstract-option-lcov|
+     - |abstract-guide-lcov|
+     - machine readable report in LCOV_ info format
+
+   * - |abstract-option-sonarqube|
+     - |abstract-guide-sonarqube|
+     - machine readable XML reports in SonarQube_ format
+
 
 Thus, gcovr can be viewed
 as a command-line alternative to the lcov_ utility, which runs gcov
@@ -32,37 +82,79 @@ and generates an HTML-formatted report.
 The development of gcovr was motivated by the need for
 text summaries and XML reports.
 
-.. _gcov: http://gcc.gnu.org/onlinedocs/gcc/Gcov.html
-.. _coverage.py: http://nedbatchelder.com/code/coverage/
+.. _gcov: https://gcc.gnu.org/onlinedocs/gcc/Gcov.html
+.. _coverage.py: https://coverage.readthedocs.io/en/stable/
+.. _clover: https://bitbucket.org/atlassian/clover/src/master/
 .. _cobertura: http://cobertura.sourceforge.net/
-.. _lcov: http://ltp.sourceforge.net/coverage/lcov.php
 .. _coveralls: https://coveralls.io/
+.. _jacoco: https://www.eclemma.org/jacoco/
+.. _lcov: https://github.com/linux-test-project/lcov
+.. _sonarqube: https://www.sonarsource.com/products/sonarqube/
 
 .. end abstract
 
+.. The above table contains links into the documentation.
+.. Here are the default targets that are used for rendering on GH or on PyPI.
+.. The targets for within the Sphinx docs are given in doc/source/index.rst
+
+.. |abstract-option-txt| replace:: ``--txt``
+.. |abstract-option-html| replace:: ``--html``
+.. |abstract-option-html-details| replace:: ``--html-details``
+.. |abstract-option-html-nested| replace:: ``--html-nested``
+.. |abstract-option-html-template-dir| replace:: ``--html-template-dir``
+.. |abstract-option-csv| replace:: ``--csv``
+.. |abstract-option-json| replace:: ``--json``
+.. |abstract-option-json-summary| replace:: ``--json-summary``
+
+.. |abstract-option-clover| replace:: ``--clover``
+.. |abstract-option-cobertura| replace:: ``--cobertura``
+.. |abstract-option-coveralls| replace:: ``--coveralls``
+.. |abstract-option-jacoco| replace:: ``--jacoco``
+.. |abstract-option-lcov| replace:: ``--lcov``
+.. |abstract-option-sonarqube| replace:: ``--sonarqube``
+
+.. |abstract-guide-txt| replace:: `Text Output <https://gcovr.com/en/stable/output/txt.html>`__
+.. |abstract-guide-html| replace:: `HTML Output <https://gcovr.com/en/stable/output/html.html>`__
+.. |abstract-guide-html-details| replace:: `HTML Output <https://gcovr.com/en/stable/output/html.html>`__
+.. |abstract-guide-html-template-dir| replace:: `HTML Output <https://gcovr.com/en/stable/output/html.html>`__
+.. |abstract-guide-csv| replace:: `CSV Output <https://gcovr.com/en/stable/output/csv.html>`__
+.. |abstract-guide-json| replace:: `JSON Output <https://gcovr.com/en/stable/output/json.html>`__
+.. |abstract-guide-json-summary| replace:: `JSON Output <https://gcovr.com/en/stable/output/json.html>`__
+
+.. |abstract-guide-clover| replace:: `Clover XML Output <https://gcovr.com/en/stable/output/clover.html>`__
+.. |abstract-guide-cobertura| replace:: `Cobertura XML Output <https://gcovr.com/en/stable/output/cobertura.html>`__
+.. |abstract-guide-coveralls| replace:: `Coveralls JSON Output <https://gcovr.com/en/stable/output/coveralls.html>`__
+.. |abstract-guide-jacoco| replace:: `JaCoCo XML Output <https://gcovr.com/en/stable/output/jacoco.html>`__
+.. |abstract-guide-lcov| replace:: `LCOV info Output <https://gcovr.com/en/stable/output/lcov.html>`__
+.. |abstract-guide-sonarqube| replace:: `SonarQube XML Output <https://gcovr.com/en/stable/output/sonarqube.html>`__
+
+
 Example HTML summary:
 
-.. image:: ./doc/images/screenshot-html.png
+.. image:: ./doc/images/screenshot-html.jpeg
 
 Example HTML details:
 
-.. image:: ./doc/images/screenshot-html-details.example.cpp.png
+.. image:: ./doc/images/screenshot-html-details.example.cpp.jpeg
 
 .. begin links
 
-.. _website:        http://gcovr.com/
-.. _documentation:  http://gcovr.com/guide.html
+.. _website:        https://gcovr.com/
+.. _documentation:  website_
 .. _repo:       https://github.com/gcovr/gcovr/
 .. _bugtracker: https://github.com/gcovr/gcovr/issues
-.. |GitHub-Actions-badge| image:: https://github.com/gcovr/gcovr/workflows/Test/badge.svg?branch=master
-   :target: https://github.com/gcovr/gcovr/actions?query=workflow%3ATest+branch%3Amaster+event%3Apush
+.. |GitHub-Actions-badge| image:: https://github.com/gcovr/gcovr/workflows/Test/badge.svg?branch=main
+   :target: https://github.com/gcovr/gcovr/actions?query=workflow%3ATest+branch%3Amain+event%3Apush
    :alt: GitHub Actions build status
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/gcovr.svg
    :target: https://pypi.python.org/pypi/gcovr
    :alt: install from PyPI
-.. |codecov-badge| image:: https://codecov.io/gh/gcovr/gcovr/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/gcovr/gcovr/branch/master
+.. |codecov-badge| image:: https://codecov.io/gh/gcovr/gcovr/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/gcovr/gcovr/branch/main
    :alt: Codecov status
+.. |Readthedocs-badge| image:: https://readthedocs.org/projects/gcovr/badge/?version=main
+   :target: https://gcovr.com/en/main/?badge=main
+   :alt: Documentation Status
 .. |gitter-badge| image:: https://badges.gitter.im/gcovr/gcovr.svg
    :target: https://gitter.im/gcovr/gcovr
    :alt: Gitter chat
@@ -112,44 +204,48 @@ This will print a tabular report on the console.
 
 ::
 
-    gcovr -r .
+    gcovr
 
-You can also generate detailed HTML reports:
+You can also generate detailed or nested HTML reports:
 
 ::
 
-    gcovr -r . --html --html-details -o coverage.html
+    gcovr --html-details coverage.html
+    gcovr --html-nested coverage.html
 
-Gcovr will create one HTML report per source file next to the coverage.html summary.
+Gcovr will create one HTML report per source file and for
+``--html-nested`` also per directory next to the coverage.html
+summary.
 
 You should run gcovr from the build directory.
 The ``-r`` option should point to the root of your project.
 This only matters if you have a separate build directory.
+For example::
 
-For complete documentation, read the `manual <documentation_>`_.
-
+    cd build; gcovr -r ..
 
 .. end quickstart
+
+For complete documentation, read the `manual <documentation_>`__.
 
 Contributing
 ------------
 
 If you want to report a bug or contribute to gcovr development,
 please read our contributing guidelines first:
-`<https://github.com/gcovr/gcovr/blob/master/CONTRIBUTING.rst>`_
+`<https://github.com/gcovr/gcovr/blob/main/CONTRIBUTING.rst>`_
 
 License
 -------
 
 .. begin license
 
-Copyright 2013-2021 the gcovr authors
-
-Copyright 2013 Sandia Corporation.
+Copyright (c) 2013-2024 the gcovr authors
+Copyright (c) 2013 Sandia Corporation.
 Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
 the U.S. Government retains certain rights in this software.
 
-Gcovr is available under the 3-clause BSD License.
+This software is distributed under the 3-clause BSD License.
 See LICENSE.txt for full details.
 See AUTHORS.txt for the full list of contributors.
 
